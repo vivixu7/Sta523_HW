@@ -1,0 +1,71 @@
+---
+STA523 Colin Rundel 
+HW1 FizzBuzz
+Vivienne Xu
+due 09102018
+---
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+```
+
+This program performs the following task: given a list of variables as input, prints each variable, if it is a positive integer, on their own line except: (1) for multiples of three prints "Fizz" instead of the variable; (2) for the multiples of five prints "Buzz"; (3) for multiples of fifteen prints "FizzBuzz". My implementation is composed of two parts: (1) check if the input is valid, i.e., if it contains only positive integers, and if it is invalid, print "invalid input" and stop the execution; (2) print the results according to the fizzbuzz algorithm.
+
+### Task 1 - Implementation
+Below is the implementation of Fizzbuzz.
+
+```{r}
+
+fizzbuzz = function(v){
+  
+  for(i in 1 : length(v)){
+    if(!is.numeric(v[i]) || v[i] != round(v[i]) || v[i] <= 0 || is.nan(v[i])|| is.infinite(v[i])){
+      stop("invalid input\n")
+    }
+  }
+  for(i in 1 : length(v)){
+    if(v[i] %% 15 == 0){
+      cat("FizzBuzz")
+    } else if(v[i] %% 5 == 0){
+      cat("Buzz")
+    } else if(v[i] %% 3 == 0){
+      cat("Fizz")
+    } else {
+      cat(v[i])
+    }
+    cat("\n")
+  }
+}
+```
+
+### Task 2 - Validation & Testing
+
+#### Good Inputs
+
+```{r}
+fizzbuzz(1)
+fizzbuzz(3)
+fizzbuzz(5)
+fizzbuzz(15)
+
+fizzbuzz(9:15)
+fizzbuzz(15:9)
+```
+
+
+#### Bad Inputs
+
+```{r error=TRUE}
+fizzbuzz(-1)
+fizzbuzz(-3)
+fizzbuzz(-5)
+
+fizzbuzz(Inf)
+fizzbuzz(-Inf)
+
+fizzbuzz("A")
+fizzbuzz(1.5)
+fizzbuzz(1i)
+fizzbuzz(4i)
+```
+
+
